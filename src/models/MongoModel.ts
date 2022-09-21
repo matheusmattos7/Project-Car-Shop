@@ -16,6 +16,11 @@ abstract class MongoModel<T> implements IModel<T> {
     const data = await this.model.find();
     return data;
   }
+
+  public async readOne(id: string): Promise<T | null> {
+    const data = await this.model.findById(id);
+    return data;
+  }
 }
 
 export default MongoModel;
