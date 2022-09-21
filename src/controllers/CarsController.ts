@@ -78,6 +78,25 @@ class CarsController {
       next(err);
     }
   }
+
+  public async delete(
+    req: Request,
+    res: Response<ICar | null>,
+    next: NextFunction,
+  ) {
+    try {
+      const { id } = req.params;
+      const result = await this._carsService.delete(id);
+
+      if (!result) {
+        throw Error(ErrorTypes.EntityNotFound);
+      }
+
+      return res.status(StatusCode.NO_CONTENT).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default CarsController;
