@@ -3,7 +3,7 @@ import { ZodError } from 'zod';
 import StatusCode from '../../Util/StatusCode';
 import { errorCatalog, ErrorTypes } from './errorCatalogs';
 
-const error: ErrorRequestHandler = (
+const errorMiddleware: ErrorRequestHandler = (
   err: Error | ZodError,
   _req: Request,
   res: Response,
@@ -16,12 +16,12 @@ const error: ErrorRequestHandler = (
   const mappedError = errorCatalog[messageAsError];
 
   if (mappedError) {
-    const { statusHttp, message } = mappedError;
+    const { statusHttp, error } = mappedError;
 
-    return res.status(statusHttp).json({ message });
+    return res.status(statusHttp).json({ error });
   }
 
   res.status(StatusCode.UNAUTHORIZED).json({ error: err.message });
 };
 
-export default error;
+export default errorMiddleware;
