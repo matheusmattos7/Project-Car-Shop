@@ -14,4 +14,6 @@ Route.post('/cars', (req, res, next) => carsController.create(req, res, next));
 
 Route.get('/cars', (req, res, next) => carsController.read(req, res, next));
 
+Route.get('/cars/:id', (req, res, next) => carsController.readOne(req, res, next));
+
 export default Route;
