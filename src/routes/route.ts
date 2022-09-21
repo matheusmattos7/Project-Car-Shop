@@ -12,4 +12,6 @@ const Route = Router();
 
 Route.post('/cars', (req, res, next) => carsController.create(req, res, next));
 
+Route.get('/cars', (req, res, next) => carsController.read(req, res, next));
+
 export default Route;
