@@ -28,6 +28,11 @@ abstract class MongoModel<T> implements IModel<T> {
     });
     return newData;
   }
+
+  public async delete(id: string): Promise<T | null> {
+    const deleted = await this.model.findByIdAndDelete(id);
+    return deleted;
+  }
 }
 
 export default MongoModel;
