@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import StatusCode from '../Util/StatusCode';
 import { ICar } from '../interfaces/ICar';
 import { IService } from '../interfaces/IService';
+import { ErrorTypes } from '../middleware/Error/errorCatalogs';
 
 class CarsController {
   private _carsService: IService<ICar>;
@@ -32,6 +33,25 @@ class CarsController {
   ) {
     try {
       const result = await this._carsService.read();
+
+      return res.status(StatusCode.OK).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async readOne(
+    req: Request,
+    res: Response<ICar | null>,
+    next: NextFunction,
+  ) {
+    try {
+      const { id } = req.params;
+      const result = await this._carsService.readOne(id);
+
+      if (!result) {
+        throw Error(ErrorTypes.EntityNotFound);
+      }
 
       return res.status(StatusCode.OK).json(result);
     } catch (err) {
