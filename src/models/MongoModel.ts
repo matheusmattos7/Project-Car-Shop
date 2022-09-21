@@ -29,7 +29,7 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async update(_id: string, data: T): Promise<T | null> {
     if (!isValidObjectId(_id)) {
-      return null;
+      throw Error(ErrorTypes.InvalidMongoId);
     }
 
     const newData = await this.model.findByIdAndUpdate(_id, data as UpdateQuery<T>, {
@@ -40,7 +40,7 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async delete(_id: string): Promise<T | null> {
     if (!isValidObjectId(_id)) {
-      return null;
+      throw Error(ErrorTypes.InvalidMongoId);
     }
 
     const deleted = await this.model.findByIdAndDelete(_id);
