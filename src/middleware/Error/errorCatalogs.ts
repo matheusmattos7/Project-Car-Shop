@@ -1,4 +1,4 @@
-import StatusCode from 'http-status-codes';
+import StatusCode from '../../Util/StatusCode';
 
 export enum ErrorTypes {
   EntityNotFound = 'EntityNotFound',

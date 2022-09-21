@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
+import StatusCode from '../Util/StatusCode';
 import { ICar } from '../interfaces/ICar';
 import { IService } from '../interfaces/IService';
 
@@ -19,7 +19,7 @@ class CarsController {
       const { body } = req;
       const result = await this._carsService.create(body);
 
-      return res.status(StatusCodes.CREATED).json(result);
+      return res.status(StatusCode.CREATED).json(result);
     } catch (err) {
       next(err);
     }
