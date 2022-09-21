@@ -24,6 +24,20 @@ class CarsController {
       next(err);
     }
   }
+
+  public async read(
+    _req: Request,
+    res: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const result = await this._carsService.read();
+
+      return res.status(StatusCode.OK).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default CarsController;
