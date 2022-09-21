@@ -58,6 +58,26 @@ class CarsController {
       next(err);
     }
   }
+
+  public async update(
+    req: Request,
+    res: Response<ICar | null>,
+    next: NextFunction,
+  ) {
+    try {
+      const { id } = req.params;
+      const { body } = req;
+      const result = await this._carsService.update(id, body);
+
+      if (!result) {
+        throw Error(ErrorTypes.EntityNotFound);
+      }
+
+      return res.status(StatusCode.OK).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default CarsController;
