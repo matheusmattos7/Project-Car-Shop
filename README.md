@@ -1,4 +1,4 @@
-# Projeto Blogs API
+# Projeto Car Shop
 
 Projeto backend feito para treinarmos o conteúdo de Hard Skills do curso da trybe.
 
